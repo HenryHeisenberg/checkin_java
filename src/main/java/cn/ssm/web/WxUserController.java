@@ -1,4 +1,4 @@
-﻿package cn.ssm.web;
+package cn.ssm.web;
 
 import java.util.Date;
 import java.util.HashMap;

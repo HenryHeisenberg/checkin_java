@@ -1,4 +1,4 @@
-﻿package cn.ssm.base;
+package cn.ssm.base;
 
 /**
  * 统一返回结果类

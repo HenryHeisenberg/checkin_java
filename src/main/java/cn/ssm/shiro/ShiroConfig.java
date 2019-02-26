@@ -1,4 +1,4 @@
-﻿package cn.ssm.shiro;
+package cn.ssm.shiro;
 
 import java.util.ArrayList;
 import java.util.HashMap;

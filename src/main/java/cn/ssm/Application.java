@@ -14,7 +14,6 @@ import tk.mybatis.spring.annotation.MapperScan;
 
 @PropertySource(value = { "classpath:init.properties" }, encoding = "UTF-8", ignoreResourceNotFound = true)
 @EnableAsync
-@EnableAutoConfiguration
 @ServletComponentScan
 @EnableSwagger2
 @SpringBootApplication

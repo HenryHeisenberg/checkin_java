@@ -1,4 +1,4 @@
-﻿package cn.ssm.Enum;
+package cn.ssm.Enum;
 
 public enum WeChatEnum {
 

@@ -29,5 +29,8 @@ hs_err_pid*
 /logs/
 /target/
 .idea/
-ccbupt.iml
 src/main/java/cn/ssm/test/
+.classpath
+.project
+/.settings
+/logs

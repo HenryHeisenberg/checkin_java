@@ -1,0 +1,2 @@
+2019-02-26 17:41:35,943 WARN  ClassPathMapperScanner: -No MyBatis mapper was found in '[cn.ssm]' package. Please check your configuration.
+2019-02-26 17:41:42,875 WARN  ThymeleafAutoConfiguration$DefaultTemplateResolverConfiguration: -Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)

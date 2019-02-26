@@ -1,0 +1,56 @@
+2019-02-26 17:41:33,477 INFO  Application: -Starting Application on DESKTOP-R5E8303 with PID 18492 (D:\javaWorkPace\checkin\target\classes started by Henry in D:\javaWorkPace\checkin)
+2019-02-26 17:41:33,486 INFO  Application: -No active profile set, falling back to default profiles: default
+2019-02-26 17:41:33,593 INFO  DevToolsPropertyDefaultsPostProcessor: -Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-02-26 17:41:33,593 INFO  DevToolsPropertyDefaultsPostProcessor: -For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-02-26 17:41:36,036 INFO  RepositoryConfigurationDelegate: -Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-02-26 17:41:36,043 INFO  RepositoryConfigurationDelegate: -Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-02-26 17:41:36,123 INFO  RepositoryConfigurationDelegate: -Finished Spring Data repository scanning in 54ms. Found 0 repository interfaces.
+2019-02-26 17:41:37,001 INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker: -Bean 'wxUserRealm' of type [cn.ssm.shiro.WxUserRealm] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-02-26 17:41:37,013 INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker: -Bean 'pointRealmAuthenticator' of type [cn.ssm.shiro.PointRealmAuthenticator] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-02-26 17:41:37,016 INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker: -Bean 'pointRealmAuthorizer' of type [cn.ssm.shiro.PointRealmAuthorizer] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-02-26 17:41:37,017 INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker: -Bean 'shiroConfig' of type [cn.ssm.shiro.ShiroConfig$$EnhancerBySpringCGLIB$$f65ae5a3] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-02-26 17:41:37,746 INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker: -Bean 'sessionManager' of type [cn.ssm.shiro.MySessionManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-02-26 17:41:37,750 INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker: -Bean 'ehCacheManager' of type [org.apache.shiro.cache.ehcache.EhCacheManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-02-26 17:41:38,010 INFO  EhCacheManager: -Cache with name 'cn.ssm.shiro.WxUserRealm.authorizationCache' does not yet exist.  Creating now.
+2019-02-26 17:41:38,019 INFO  EhCacheManager: -Added EhCache named [cn.ssm.shiro.WxUserRealm.authorizationCache]
+2019-02-26 17:41:38,022 INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker: -Bean 'securityManager' of type [org.apache.shiro.web.mgt.DefaultWebSecurityManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-02-26 17:41:38,116 INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker: -Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$c1f974ec] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-02-26 17:41:38,139 INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker: -Bean 'authorizationAttributeSourceAdvisor' of type [org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-02-26 17:41:38,863 INFO  TomcatWebServer: -Tomcat initialized with port(s): 80 (http)
+2019-02-26 17:41:38,889 INFO  Http11NioProtocol: -Initializing ProtocolHandler ["http-nio-80"]
+2019-02-26 17:41:38,906 INFO  StandardService: -Starting service [Tomcat]
+2019-02-26 17:41:38,908 INFO  StandardEngine: -Starting Servlet Engine: Apache Tomcat/9.0.13
+2019-02-26 17:41:38,934 INFO  AprLifecycleListener: -The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_191\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Java\jdk1.8.0_191\jre\bin;C:/Program Files/Java/jdk-9.0.4/bin/server;C:/Program Files/Java/jdk-9.0.4/bin;D:\Redis-x64-3.2.100;C:\Users\Henry\AppData\Local\Programs\Python\Python37\Scripts;C:;C:\Program Files\Java\jdk-9.0.4\bin;%TALINA_HOME%\bin\C:\Program Files\Java\jdk-9.0.4\jre\bin;\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\Calibre2\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;D:\Program Files\MySQL\MySQL Server 5.5\bin;C:\Program Files (x86)\VisualSVN Server\bin;D:\apache-maven-3.0.5\bin;C:\Program Files\TortoiseSVN\bin;D:\JavaUtil\Subversion\bin;C:\Program Files (x86)\Rational\common;D:\Program Files (x86)\IBM\Glassbox\GBootStrap\bin;C:\Program Files\Git\usr\bin;C:\Users\Henry\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files (x86)\CVSNT\;C:\MinGW\bin;;D:\开发工具;;.]
+2019-02-26 17:41:39,176 INFO  [/]: -Initializing Spring embedded WebApplicationContext
+2019-02-26 17:41:39,176 INFO  ContextLoader: -Root WebApplicationContext: initialization completed in 5583 ms
+2019-02-26 17:41:41,873 INFO  EhCacheManagerFactoryBean: -Initializing EhCache CacheManager
+2019-02-26 17:41:42,598 INFO  ThreadPoolTaskExecutor: -Initializing ExecutorService 'applicationTaskExecutor'
+2019-02-26 17:41:42,665 INFO  OptionalLiveReloadServer: -LiveReload server is running on port 35729
+2019-02-26 17:41:43,005 INFO  MapperCacheDisabler: -Clear tk.mybatis.mapper.util.MsUtil CLASS_CACHE cache.
+2019-02-26 17:41:43,006 INFO  MapperCacheDisabler: -Clear tk.mybatis.mapper.genid.GenIdUtil CACHE cache.
+2019-02-26 17:41:43,006 INFO  MapperCacheDisabler: -Clear tk.mybatis.mapper.version.VersionUtil CACHE cache.
+2019-02-26 17:41:43,007 INFO  MapperCacheDisabler: -Clear EntityHelper entityTableMap cache.
+2019-02-26 17:41:44,582 INFO  DocumentationPluginsBootstrapper: -Context refreshed
+2019-02-26 17:41:44,629 INFO  DocumentationPluginsBootstrapper: -Found 1 custom documentation plugin(s)
+2019-02-26 17:41:44,651 INFO  ApiListingReferenceScanner: -Scanning for api listing references
+2019-02-26 17:41:44,888 INFO  CachingOperationNameGenerator: -Generating unique operation named: loginUsingPOST_1
+2019-02-26 17:41:44,893 INFO  CachingOperationNameGenerator: -Generating unique operation named: loginUsingPOST_2
+2019-02-26 17:41:44,896 INFO  CachingOperationNameGenerator: -Generating unique operation named: loginUsingPOST_3
+2019-02-26 17:41:44,901 INFO  CachingOperationNameGenerator: -Generating unique operation named: loginUsingPOST_4
+2019-02-26 17:41:44,905 INFO  CachingOperationNameGenerator: -Generating unique operation named: loginUsingPOST_5
+2019-02-26 17:41:44,910 INFO  CachingOperationNameGenerator: -Generating unique operation named: loginUsingPOST_6
+2019-02-26 17:41:44,914 INFO  CachingOperationNameGenerator: -Generating unique operation named: loginUsingPOST_7
+2019-02-26 17:41:44,991 INFO  CachingOperationNameGenerator: -Generating unique operation named: clearCachedAuthorizationInfoUsingGET_1
+2019-02-26 17:41:44,996 INFO  CachingOperationNameGenerator: -Generating unique operation named: loginUsingPOST_8
+2019-02-26 17:41:45,000 INFO  CachingOperationNameGenerator: -Generating unique operation named: loginUsingPOST_9
+2019-02-26 17:41:45,004 INFO  CachingOperationNameGenerator: -Generating unique operation named: loginUsingPOST_10
+2019-02-26 17:41:45,007 INFO  CachingOperationNameGenerator: -Generating unique operation named: loginUsingPOST_11
+2019-02-26 17:41:45,010 INFO  CachingOperationNameGenerator: -Generating unique operation named: loginUsingPOST_12
+2019-02-26 17:41:45,012 INFO  CachingOperationNameGenerator: -Generating unique operation named: loginUsingPOST_13
+2019-02-26 17:41:45,015 INFO  CachingOperationNameGenerator: -Generating unique operation named: loginUsingPOST_14
+2019-02-26 17:41:45,018 INFO  CachingOperationNameGenerator: -Generating unique operation named: loginUsingPOST_15
+2019-02-26 17:41:45,021 INFO  CachingOperationNameGenerator: -Generating unique operation named: selectByIdUsingGET_1
+2019-02-26 17:41:45,056 INFO  Http11NioProtocol: -Starting ProtocolHandler ["http-nio-80"]
+2019-02-26 17:41:45,070 INFO  NioSelectorPool: -Using a shared selector for servlet write/read
+2019-02-26 17:41:45,121 INFO  TomcatWebServer: -Tomcat started on port(s): 80 (http) with context path ''
+2019-02-26 17:41:45,129 INFO  Application: -Started Application in 12.465 seconds (JVM running for 14.529)

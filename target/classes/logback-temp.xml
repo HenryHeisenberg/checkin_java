@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- scan: 当此属性设置为true时，配置文件如果发生改变，将会被重新加载，默认值为true。 -->
+<!-- scanPeriod: 设置监测配置文件是否有修改的时间间隔，如果没有给出时间单位，默认单位是毫秒。当scan为true时，此属性生效。默认的时间间隔为1分钟。 -->
+<!-- debug: 当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值为false。 -->
+<configuration scan="true" scanPeriod="60 seconds"
+	debug="false">
+
+	<!--配置规则类的位置 -->
+	<!-- 显示本地服务器IP（内网） -->
+	<conversionRule conversionWord="ip"
+		converterClass="cn.ssm.config.IPLogConfig" />
+
+	<!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径 -->
+	<!-- <property> ：用来定义变量值，它有两个属性name和value，通过<property>定义的值会被插入到logger上下文中，可以使“${}”来使用变量。 -->
+	<!-- name: 变量的名称 value: 的值时变量定义的值 ，下面使用${LOG_HOME} -->
+	<property name="LOG_HOME" value="./log" />
+	<!-- <timestamp>：获取时间戳字符串，他有两个属性key和datePattern,使用${bySecond} -->
+	<!-- key: 标识此<timestamp> 的名字； datePattern: 设置将当前时间（解析配置文件的时间）转换为字符串的模式，遵循java.txt.SimpleDateFormat的格式。 -->
+	<timestamp key="bySecond"
+		datePattern="yyyy-MM-dd HH:mm:ss.SSS" />
+
+
+	<!-- 控制台输出 -->
+	<!-- <appender>：负责写日志的组件，它有两个必要属性name和class。name指定appender名称，class指定appender的全限定名 -->
+	<!-- ConsoleAppender 把日志输出到控制台，有以下子节点： <encoder>：对日志进行格式化。（具体参数稍后讲解 ） <target>：字符串System.out(默认)或者System.err（区别不多说了） -->
+	<appender name="STDOUT"
+		class="ch.qos.logback.core.ConsoleAppender">
+		<encoder
+			class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符 -->
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%X{RemoteHost}]
+				[%X{servletPath}]
+				[%thread] %-5level %logger{50}
+				%msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<!-- 按照每天生成日志文件 -->
+	<appender name="FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!--日志文件输出的文件名 -->
+			<FileNamePattern>${LOG_HOME}/Web.log.%d{yyyy-MM-dd}.log
+			</FileNamePattern>
+			<!--日志文件保留天数 -->
+			<MaxHistory>30</MaxHistory>
+		</rollingPolicy>
+		<encoder
+			class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<!--格式化输出：%d表示日期，%ip：打印IP地址自定义实现，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符 -->
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%X{RemoteHost}]
+				[%X{servletPath}]
+				[%thread] %-5level %logger{50}
+				%msg%n</pattern>
+		</encoder>
+		<!--日志文件最大的大小 -->
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>1MB</MaxFileSize>
+		</triggeringPolicy>
+	</appender>
+
+	<!-- <loger>：用来设置某一个包或具体的某一个类的日志打印级别、以及指定<appender>。<loger>仅有一个name属性，一个可选的level和一个可选的addtivity属性。 
+		可以包含零个或多个<appender-ref>元素，标识这个appender将会添加到这个loger -->
+	<!-- name: 用来指定受此loger约束的某一个包或者具体的某一个类。 level: 用来设置打印级别，大小写无关：TRACE, DEBUG, 
+		INFO, WARN, ERROR, ALL和OFF，还有一个特俗值INHERITED或者同义词NULL，代表强制执行上级的级别。 如果未设置此属性，那么当前loger将会继承上级的级别。 
+		addtivity: 是否向上级loger传递打印信息。默认是true。同<loger>一样，可以包含零个或多个<appender-ref>元素，标识这个appender将会添加到这个loger。 -->
+	<!-- 所有错误 -->
+	<!-- <logger name="cn.ssm.LogInterceptor" level="INFO"> <appender-ref ref="FILE" 
+		/> </logger> -->
+
+	<!-- 输出：日志输出级别 -->
+	<!-- <root>:它也是<loger>元素，但是它是根loger,是所有<loger>的上级。只有一个level属性，因为name已经被命名为"root",且已经是最上级了。 
+		level: 用来设置打印级别，大小写无关：TRACE, DEBUG, INFO, WARN, ERROR, ALL和OFF，不能设置为INHERITED或者同义词NULL。 
+		默认是DEBUG。 -->
+
+	<root level="INFO">
+		<appender-ref ref="STDOUT" />
+		<!-- <appender-ref ref="FILE" /> -->
+	</root>
+
+</configuration>

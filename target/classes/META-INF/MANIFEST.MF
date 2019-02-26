@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: Henry
+Build-Jdk: 9.0.4
+Implementation-Title: checkin Maven Webapp
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: cn.henry
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/checkin
+Created-By: Maven Integration for Eclipse
+

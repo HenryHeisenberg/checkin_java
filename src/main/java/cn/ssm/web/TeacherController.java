@@ -7,6 +7,7 @@ import cn.ssm.service.CheckinInfoService;
 import cn.ssm.service.ClassInfoService;
 import cn.ssm.utils.util.StringUtil;
 import cn.ssm.utils.util.UUIDUtils;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,7 +46,8 @@ public class TeacherController {
         }
         classInfo.setId(UUIDUtils.getUUID());
         classInfoService.insert(classInfo);
-        return BaseResult.success("添加课程成功");
+        List<ClassInfo> classInfos = classInfoService.selectAll();
+        return BaseResult.success(classInfos);
     }
 
     @PostMapping("/setCheckin")
@@ -65,6 +67,16 @@ public class TeacherController {
         checkinInfo.setId(UUIDUtils.getUUID());
         checkinInfoService.insert(checkinInfo);
         return BaseResult.success("设置签到成功");
+    }
+
+    @GetMapping("/getAllCheckin")
+    public Object getAllCheckins(CheckinInfo checkinInfo){
+        if(StringUtils.isEmpty(checkinInfo.getClassId())){
+            return BaseResult.fail("课程不能为空");
+        }
+        PageHelper.orderBy("create_time");
+        List<CheckinInfo> select = checkinInfoService.select(checkinInfo);
+        return BaseResult.success(select);
     }
 
 

@@ -9,11 +9,13 @@ import cn.ssm.utils.util.StringUtil;
 import cn.ssm.utils.util.UUIDUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping("/teacher")
@@ -24,6 +26,17 @@ public class TeacherController {
 
     @Autowired
     CheckinInfoService checkinInfoService;
+
+    @GetMapping("/getClassesByID")
+    public Object getClassesByID(String id){
+        if(StringUtils.isEmpty(id)){
+            return BaseResult.fail("老师ID不能为空！");
+        }
+        ClassInfo classInfo=new ClassInfo();
+        classInfo.setTeacherId(id);
+        List<ClassInfo> select = classInfoService.select(classInfo);
+        return BaseResult.success(select);
+    }
 
     @PostMapping("/createClass")
     public Object createClass(ClassInfo classInfo){

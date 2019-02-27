@@ -59,6 +59,9 @@ public class UserController {
 		if (StringUtils.isAnyBlank(username, password)) {
 			return BaseResult.fail("账号或密码为空");
 		}
+	      if (StringUtils.isEmpty(user.getRole().toString())) {
+	            return BaseResult.fail("角色设置不不能为空");
+	        }
         UserInfo user2 = new UserInfo();
 		user2.setUsername(username);
         UserInfo selectOne = userInfoService.selectOne(user2);

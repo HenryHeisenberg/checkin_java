@@ -20,11 +20,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-<<<<<<< HEAD
 import java.util.ArrayList;
-=======
 import java.text.SimpleDateFormat;
->>>>>>> 302c7a98fe03adbfd4fbb30ae15ccf6692ea5023
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -48,7 +45,6 @@ public class StudentController {
     @Autowired
     UserInfoService userInfoService;
 
-<<<<<<< HEAD
     //查找学生信息
     @PostMapping("/getStudent")
     public Object getStudent(String id) {
@@ -65,9 +61,6 @@ public class StudentController {
 
     // 通过学生id查询已选课程
     @PostMapping("/getClassesById")
-=======
-
-    @GetMapping("/getClasses")
     public Object getClasses() {
         ClassInfo classInfo = new ClassInfo();
         List<ClassInfo> selectAll = classInfoService.selectAll();
@@ -75,7 +68,6 @@ public class StudentController {
     }
 
     @GetMapping("/getClassesById")
->>>>>>> 302c7a98fe03adbfd4fbb30ae15ccf6692ea5023
     public Object getClassesById(String id) {
         if (StringUtils.isEmpty(id)) {
             return BaseResult.fail("学生ID不能为空！");
@@ -106,12 +98,8 @@ public class StudentController {
         return BaseResult.success(selectByKey);
     }
 
-<<<<<<< HEAD
     // 查询是否缺席
     @PostMapping("selectCheckOrNotById")
-=======
-    @GetMapping("/selectCheckOrNotById")
->>>>>>> 302c7a98fe03adbfd4fbb30ae15ccf6692ea5023
     public Object selectCheckOrNot(String studentId, String classId) {
         if (StringUtils.isEmpty(studentId)) {
             return BaseResult.fail("学生ID不能为空！");
@@ -132,7 +120,6 @@ public class StudentController {
         }
     }
 
-<<<<<<< HEAD
     // 用于选课
     @PostMapping("setClass")
     public Object setClass(String studentId, String classId) {
@@ -154,7 +141,6 @@ public class StudentController {
     public Object checkin(int check, String id) {
         return null;
     }
-=======
     @PostMapping("/checkIn")
     public Object checkIn(String studentId, String checkId ,String path) {
         if (StringUtils.isEmpty(studentId)) {
@@ -197,5 +183,4 @@ public class StudentController {
         return BaseResult.success("签到成功");
     }
 
->>>>>>> 302c7a98fe03adbfd4fbb30ae15ccf6692ea5023
 }

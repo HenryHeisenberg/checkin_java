@@ -14,44 +14,45 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/user")
 public class UserController {
 
-	@Autowired
+    @Autowired
     UserInfoService userInfoService;
 
-	@PostMapping("/login")
-	public Object login(UserInfo user) {
-		String username = user.getUsername();
-		String password = user.getPassword();
-		if (StringUtils.isAnyBlank(username, password)) {
-			return BaseResult.fail("账号或密码为空");
-		}
+    @PostMapping("/login")
+    public Object login(UserInfo user) {
+        String username = user.getUsername();
+        String password = user.getPassword();
+        if (StringUtils.isAnyBlank(username, password)) {
+            return BaseResult.fail("账号或密码为空");
+        }
         UserInfo selectOne = userInfoService.selectOne(user);
-		if (selectOne != null) {
-			return BaseResult.success(selectOne);
-		}
-		return BaseResult.fail("账号或密码错误");
-	}
+        if (selectOne != null) {
+            return BaseResult.success(selectOne);
+        }
+        return BaseResult.fail("账号或密码错误");
+    }
 
-	@PostMapping("/update")
-	public Object update(String id, String old, String newPassword) {
-		if (id == null || StringUtils.isAnyBlank(old, newPassword)) {
-			return BaseResult.fail("缺少参数");
-		}
+    @PostMapping("/update")
+    public Object update(String id, String old, String newPassword) {
+        if (id == null || StringUtils.isAnyBlank(old, newPassword)) {
+            return BaseResult.fail("缺少参数");
+        }
         UserInfo selectByKey = userInfoService.selectByKey(id);
-		String password = selectByKey.getPassword();
-		if (!password.equals(old)) {
-			return BaseResult.fail("原密码错误");
-		}
-		selectByKey.setPassword(newPassword);
+        String password = selectByKey.getPassword();
+        if (!password.equals(old)) {
+            return BaseResult.fail("原密码错误");
+        }
+        selectByKey.setPassword(newPassword);
         userInfoService.updateByPrimaryKeySelective(selectByKey);
-		return BaseResult.success(selectByKey);
-	}
+        return BaseResult.success(selectByKey);
+    }
 
-	@PostMapping("/updateInfo")
-	public Object updateInfo(UserInfo user) {
-		userInfoService.updateByPrimaryKeySelective(user);
-		return BaseResult.success("更新成功");
-	}
+    @PostMapping("/updateInfo")
+    public Object updateInfo(UserInfo user) {
+        userInfoService.updateByPrimaryKeySelective(user);
+        return BaseResult.success("更新成功");
+    }
 
+<<<<<<< HEAD
 	@PostMapping("/register")
 	public Object register(UserInfo user) {
 		String username = user.getUsername();
@@ -62,16 +63,28 @@ public class UserController {
 //	      if (StringUtils.isEmpty(user.getRole().toString())) {
 //	            return BaseResult.fail("角色设置不不能为空");
 //	        }
+=======
+    @PostMapping("/register")
+    public Object register(UserInfo user) {
+        String username = user.getUsername();
+        String password = user.getPassword();
+        if (StringUtils.isAnyBlank(username, password)) {
+            return BaseResult.fail("账号或密码为空");
+        }
+        if (StringUtils.isEmpty(user.getRole().toString())) {
+            return BaseResult.fail("角色设置不不能为空");
+        }
+>>>>>>> 302c7a98fe03adbfd4fbb30ae15ccf6692ea5023
         UserInfo user2 = new UserInfo();
-		user2.setUsername(username);
+        user2.setUsername(username);
         UserInfo selectOne = userInfoService.selectOne(user2);
-		if (selectOne != null) {
-			return BaseResult.fail("该用户已存在");
-		}
-		user.setId(UUIDUtils.getUUID());
+        if (selectOne != null) {
+            return BaseResult.fail("该用户已存在");
+        }
+        user.setId(UUIDUtils.getUUID());
         userInfoService.insert(user);
         UserInfo selectOne2 = userInfoService.selectOne(user);
-		return BaseResult.success(selectOne2);
-	}
+        return BaseResult.success(selectOne2);
+    }
 
 }

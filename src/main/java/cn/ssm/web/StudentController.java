@@ -20,7 +20,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
+=======
+import java.text.SimpleDateFormat;
+>>>>>>> 302c7a98fe03adbfd4fbb30ae15ccf6692ea5023
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -44,6 +48,7 @@ public class StudentController {
     @Autowired
     UserInfoService userInfoService;
 
+<<<<<<< HEAD
     //查找学生信息
     @PostMapping("/getStudent")
     public Object getStudent(String id) {
@@ -60,6 +65,17 @@ public class StudentController {
 
     // 通过学生id查询已选课程
     @PostMapping("/getClassesById")
+=======
+
+    @GetMapping("/getClasses")
+    public Object getClasses() {
+        ClassInfo classInfo = new ClassInfo();
+        List<ClassInfo> selectAll = classInfoService.selectAll();
+        return BaseResult.success(selectAll);
+    }
+
+    @GetMapping("/getClassesById")
+>>>>>>> 302c7a98fe03adbfd4fbb30ae15ccf6692ea5023
     public Object getClassesById(String id) {
         if (StringUtils.isEmpty(id)) {
             return BaseResult.fail("学生ID不能为空！");
@@ -90,8 +106,12 @@ public class StudentController {
         return BaseResult.success(selectByKey);
     }
 
+<<<<<<< HEAD
     // 查询是否缺席
     @PostMapping("selectCheckOrNotById")
+=======
+    @GetMapping("/selectCheckOrNotById")
+>>>>>>> 302c7a98fe03adbfd4fbb30ae15ccf6692ea5023
     public Object selectCheckOrNot(String studentId, String classId) {
         if (StringUtils.isEmpty(studentId)) {
             return BaseResult.fail("学生ID不能为空！");
@@ -112,6 +132,7 @@ public class StudentController {
         }
     }
 
+<<<<<<< HEAD
     // 用于选课
     @PostMapping("setClass")
     public Object setClass(String studentId, String classId) {
@@ -133,4 +154,48 @@ public class StudentController {
     public Object checkin(int check, String id) {
         return null;
     }
+=======
+    @PostMapping("/checkIn")
+    public Object checkIn(String studentId, String checkId ,String path) {
+        if (StringUtils.isEmpty(studentId)) {
+            return BaseResult.fail("学生ID不能为空！");
+        }
+        if (StringUtils.isEmpty(checkId)) {
+            return BaseResult.fail("签到ID不能为空！");
+        }
+        if (StringUtils.isEmpty(path)) {
+            return BaseResult.fail("签到照片不能为空！");
+        }
+        CheckinInfo select = new CheckinInfo();
+        select.setId(checkId);
+        CheckinInfo checkinInfo = checkinInfoService.selectByKey(select);
+        Date now = new Date();
+        if (checkinInfo == null) {
+            return BaseResult.fail("未查询到此次签到");
+        }
+
+        Date startTime = checkinInfo.getStartTime();
+        Date endTime = checkinInfo.getEndTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String start = sdf.format(startTime);
+        if (startTime.after(now)) {
+            return BaseResult.fail("此次签到未开始,开始时间为:" + start);
+        }
+        if (endTime.before(now)) {
+            return BaseResult.fail("此次签到已结束");
+        }
+        StudentCheckin studentCheckin=new StudentCheckin();
+        studentCheckin.setCheckinId(checkId);
+        studentCheckin.setStudentId(studentId);
+        StudentCheckin re_student = studentCheckinService.selectOne(studentCheckin);
+        if(re_student!=null){
+            return BaseResult.fail("请勿重复签到");
+        }
+        studentCheckin.setCreateTime(now);
+        studentCheckin.setImg(path);
+        studentCheckinService.insert(studentCheckin);
+        return BaseResult.success("签到成功");
+    }
+
+>>>>>>> 302c7a98fe03adbfd4fbb30ae15ccf6692ea5023
 }

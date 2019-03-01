@@ -80,8 +80,8 @@ redis:
 wx:
   miniapp:
     configs:
-        - appid: wx37247a3519b74f4e #微信小程序的appid
-          secret: d3673c569c41d9ee6f60e2cc6e6f6c67 #微信小程序的Secret
+        - appid: wx9394d0eb96664c21 #微信小程序的appid
+          secret: f5c76ac2bb4daac3fc70d43fde71fbed #微信小程序的Secret
           token: #微信小程序消息服务器配置的token
           aesKey: #微信小程序消息服务器配置的EncodingAESKey
           msgDataFormat: JSON

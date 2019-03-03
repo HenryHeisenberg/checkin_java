@@ -137,10 +137,6 @@ public class StudentController {
         return BaseResult.success("选择" + classInfo.getName() + "课程成功");
     }
 
-    @PostMapping("checkin")
-    public Object checkin(int check, String id) {
-        return null;
-    }
     @PostMapping("/checkIn")
     public Object checkIn(String studentId, String checkId ,String path) {
         if (StringUtils.isEmpty(studentId)) {

@@ -52,18 +52,7 @@ public class UserController {
         return BaseResult.success("更新成功");
     }
 
-<<<<<<< HEAD
-	@PostMapping("/register")
-	public Object register(UserInfo user) {
-		String username = user.getUsername();
-		String password = user.getPassword();
-		if (StringUtils.isAnyBlank(username, password)) {
-			return BaseResult.fail("账号或密码为空");
-		}
-//	      if (StringUtils.isEmpty(user.getRole().toString())) {
-//	            return BaseResult.fail("角色设置不不能为空");
-//	        }
-=======
+
     @PostMapping("/register")
     public Object register(UserInfo user) {
         String username = user.getUsername();
@@ -74,7 +63,6 @@ public class UserController {
         if (StringUtils.isEmpty(user.getRole().toString())) {
             return BaseResult.fail("角色设置不不能为空");
         }
->>>>>>> 302c7a98fe03adbfd4fbb30ae15ccf6692ea5023
         UserInfo user2 = new UserInfo();
         user2.setUsername(username);
         UserInfo selectOne = userInfoService.selectOne(user2);

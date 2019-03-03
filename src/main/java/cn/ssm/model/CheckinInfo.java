@@ -20,6 +20,18 @@ public class CheckinInfo {
     @Column(name = "end_time")
     private Date endTime;
 
+    @Transient
+    private boolean IsSign;
+    
+
+    public boolean isIsSign() {
+        return IsSign;
+    }
+
+    public void setIsSign(boolean isSign) {
+        IsSign = isSign;
+    }
+
     /**
      * @return id
      */

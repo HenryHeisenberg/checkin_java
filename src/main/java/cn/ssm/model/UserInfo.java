@@ -15,6 +15,9 @@ public class UserInfo {
 
     private String name;
 
+    @Column(name = "open_id")
+    private String openId;
+
     @Column(name = "class_name")
     private String className;
 
@@ -88,6 +91,20 @@ public class UserInfo {
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * @return open_id
+     */
+    public String getOpenId() {
+        return openId;
+    }
+
+    /**
+     * @param openId
+     */
+    public void setOpenId(String openId) {
+        this.openId = openId;
     }
 
     /**

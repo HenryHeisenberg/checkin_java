@@ -14,11 +14,14 @@ import cn.ssm.service.UserInfoService;
 import cn.ssm.utils.util.StringUtil;
 import cn.ssm.utils.util.UUIDUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.github.pagehelper.PageHelper;
 
 import java.util.ArrayList;
 import java.text.SimpleDateFormat;
@@ -59,15 +62,8 @@ public class StudentController {
         return BaseResult.success(findUnselected);
     }
 
-    // 通过学生id查询已选课程
+    //查询已加入的课程
     @PostMapping("/getClassesById")
-    public Object getClasses() {
-        ClassInfo classInfo = new ClassInfo();
-        List<ClassInfo> selectAll = classInfoService.selectAll();
-        return BaseResult.success(selectAll);
-    }
-
-    @GetMapping("/getClassesById")
     public Object getClassesById(String id) {
         if (StringUtils.isEmpty(id)) {
             return BaseResult.fail("学生ID不能为空！");
@@ -137,10 +133,6 @@ public class StudentController {
         return BaseResult.success("选择" + classInfo.getName() + "课程成功");
     }
 
-    @PostMapping("checkin")
-    public Object checkin(int check, String id) {
-        return null;
-    }
     @PostMapping("/checkIn")
     public Object checkIn(String studentId, String checkId ,String path) {
         if (StringUtils.isEmpty(studentId)) {
@@ -181,6 +173,36 @@ public class StudentController {
         studentCheckin.setImg(path);
         studentCheckinService.insert(studentCheckin);
         return BaseResult.success("签到成功");
+    }
+    //根据课程ID查询所有签到表
+    @PostMapping("/getCheckInByClassId")
+    public Object getCheckInByClassId(String classId,String userId) {
+        List<CheckinInfo> selectByExample = checkinInfoService.findListCheckin(classId);
+        for(CheckinInfo c:selectByExample) {
+            c.setIsSign(false);
+            String id = c.getId();
+            StudentCheckin studentCheckin = new StudentCheckin();
+            studentCheckin.setCheckinId(id);
+            studentCheckin.setStudentId(userId);
+            List<StudentCheckin> select = studentCheckinService.select(studentCheckin);
+            if(select.size()>0) {
+                c.setIsSign(true);
+            }
+        }
+        if(selectByExample.isEmpty()) {
+            BaseResult.fail("此课程没有任何签到信息");
+        }
+        return BaseResult.success(selectByExample);
+    }
+    
+    //查询是否缺席
+    @PostMapping("/findCheckedOrNot")
+    public Object findCheckedOrNot(String studentId,String classId) {
+        List<StudentCheckin> findCheckedOrNot = studentCheckinService.findCheckedOrNot(studentId, classId);
+        if(findCheckedOrNot.isEmpty()) {
+            return BaseResult.success("此课未缺席");
+        }
+        return BaseResult.success(findCheckedOrNot);
     }
 
 }

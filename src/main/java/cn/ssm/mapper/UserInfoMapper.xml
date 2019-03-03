@@ -10,6 +10,7 @@
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="role" jdbcType="BIT" property="role" />
     <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="open_id" jdbcType="VARCHAR" property="openId" />
     <result column="class_name" jdbcType="VARCHAR" property="className" />
     <result column="img" jdbcType="VARCHAR" property="img" />
   </resultMap>

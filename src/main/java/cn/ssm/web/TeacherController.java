@@ -46,7 +46,9 @@ public class TeacherController {
         }
         classInfo.setId(UUIDUtils.getUUID());
         classInfoService.insert(classInfo);
-        List<ClassInfo> classInfos = classInfoService.selectAll();
+        ClassInfo classInfo1=new ClassInfo();
+        classInfo1.setTeacherId(classInfo.getTeacherId());
+        List<ClassInfo> classInfos = classInfoService.select(classInfo1);
         return BaseResult.success(classInfos);
     }
 

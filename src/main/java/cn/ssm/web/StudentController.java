@@ -44,17 +44,17 @@ public class StudentController {
 
     @Autowired
     StudentCheckinService studentCheckinService;
-    
+
     @Autowired
     UserInfoService userInfoService;
 
-    //查找学生信息
+    // 查找学生信息
     @PostMapping("/getStudent")
     public Object getStudent(String id) {
         UserInfo selectByKey = userInfoService.selectByKey(id);
         return BaseResult.success(selectByKey);
     }
-    
+
     // 查询未加入的课程
     @GetMapping("/getClasses")
     public Object getClasses(String id) {
@@ -62,7 +62,7 @@ public class StudentController {
         return BaseResult.success(findUnselected);
     }
 
-    //查询已加入的课程
+    // 查询已加入的课程
     @PostMapping("/getClassesById")
     public Object getClassesById(String id) {
         if (StringUtils.isEmpty(id)) {
@@ -134,7 +134,7 @@ public class StudentController {
     }
 
     @PostMapping("/checkIn")
-    public Object checkIn(String studentId, String checkId ,String path) {
+    public Object checkIn(String studentId, String checkId, String path) {
         if (StringUtils.isEmpty(studentId)) {
             return BaseResult.fail("学生ID不能为空！");
         }
@@ -162,11 +162,11 @@ public class StudentController {
         if (endTime.before(now)) {
             return BaseResult.fail("此次签到已结束");
         }
-        StudentCheckin studentCheckin=new StudentCheckin();
+        StudentCheckin studentCheckin = new StudentCheckin();
         studentCheckin.setCheckinId(checkId);
         studentCheckin.setStudentId(studentId);
         StudentCheckin re_student = studentCheckinService.selectOne(studentCheckin);
-        if(re_student!=null){
+        if (re_student != null) {
             return BaseResult.fail("请勿重复签到");
         }
         studentCheckin.setCreateTime(now);
@@ -174,32 +174,45 @@ public class StudentController {
         studentCheckinService.insert(studentCheckin);
         return BaseResult.success("签到成功");
     }
-    //根据课程ID查询所有签到表
+
+    // 根据课程ID查询所有签到表
     @PostMapping("/getCheckInByClassId")
-    public Object getCheckInByClassId(String classId,String userId) {
+    public Object getCheckInByClassId(String classId, String userId) {
         List<CheckinInfo> selectByExample = checkinInfoService.findListCheckin(classId);
-        for(CheckinInfo c:selectByExample) {
+        for (CheckinInfo c : selectByExample) {
             c.setIsSign(false);
             String id = c.getId();
             StudentCheckin studentCheckin = new StudentCheckin();
             studentCheckin.setCheckinId(id);
             studentCheckin.setStudentId(userId);
             List<StudentCheckin> select = studentCheckinService.select(studentCheckin);
-            if(select.size()>0) {
+            if (select.size() > 0) {
                 c.setIsSign(true);
             }
+            long startTime = c.getStartTime().getTime();
+            long endTime = c.getEndTime().getTime();
+            long now = new Date().getTime();
+            if (now > endTime && c.isIsSign() == false) {
+                c.setStatus("已超时而且缺席");
+            } else if (now > startTime && c.isIsSign() == true) {
+                c.setStatus("已签到");
+            } else if (now < startTime) {
+                c.setStatus("未到签到时间");
+            } else if (now > startTime && now < endTime && c.isIsSign() == false) {
+                c.setStatus("可进行签到");
+            }
         }
-        if(selectByExample.isEmpty()) {
+        if (selectByExample.isEmpty()) {
             BaseResult.fail("此课程没有任何签到信息");
         }
         return BaseResult.success(selectByExample);
     }
-    
-    //查询是否缺席
+
+    // 查询是否缺席
     @PostMapping("/findCheckedOrNot")
-    public Object findCheckedOrNot(String studentId,String classId) {
+    public Object findCheckedOrNot(String studentId, String classId) {
         List<StudentCheckin> findCheckedOrNot = studentCheckinService.findCheckedOrNot(studentId, classId);
-        if(findCheckedOrNot.isEmpty()) {
+        if (findCheckedOrNot.isEmpty()) {
             return BaseResult.success("此课未缺席");
         }
         return BaseResult.success(findCheckedOrNot);

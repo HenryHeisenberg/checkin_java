@@ -59,6 +59,11 @@ public class StudentController {
     @GetMapping("/getClasses")
     public Object getClasses(String id) {
         List<ClassInfo> findUnselected = classInfoService.findUnselected(id);
+        for(ClassInfo cls:findUnselected) {
+            String teacherId = cls.getTeacherId();
+            UserInfo selectByKey = userInfoService.selectByKey(teacherId);
+            cls.setTeacherName(selectByKey.getName());
+        }
         return BaseResult.success(findUnselected);
     }
 

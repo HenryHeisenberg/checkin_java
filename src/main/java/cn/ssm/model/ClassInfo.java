@@ -11,12 +11,23 @@ public class ClassInfo {
 
     @Column(name = "teacher_id")
     private String teacherId;
+    
+    @Transient
+    private String teacherName;
 
     /**
      * @return id
      */
     public String getId() {
         return id;
+    }
+
+    public String getTeacherName() {
+        return teacherName;
+    }
+
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
     }
 
     /**

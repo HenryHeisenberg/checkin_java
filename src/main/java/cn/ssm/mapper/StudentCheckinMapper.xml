@@ -10,4 +10,41 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="img" jdbcType="VARCHAR" property="img" />
   </resultMap>
+  <select id="getAbsentStudents" resultType="cn.ssm.model.StudentCheckInInfo">
+        SELECT
+	DISTINCT
+	user_info.username
+FROM
+	user_info,
+	student_checkin,
+	checkin_info,student_class
+WHERE
+	checkin_info.id=#{id} and
+	checkin_info.class_id=student_class.class_id and user_info.id=student_class.student_id and
+	user_info .id not IN
+	(
+SELECT
+	user_info.id
+FROM
+	checkin_info,
+	user_info,
+	student_checkin
+WHERE
+	student_checkin.checkin_id = #{id}
+	AND checkin_info.id = student_checkin.checkin_id
+	AND student_checkin.student_id = user_info.id
+)
+  </select>
+  <select id="getPresentStudents" resultType="cn.ssm.model.StudentCheckInInfo">
+    SELECT
+	user_info.username,student_checkin.create_time
+FROM
+	checkin_info,
+	user_info,
+	student_checkin
+WHERE
+	student_checkin.checkin_id = #{id}
+	AND checkin_info.id = student_checkin.checkin_id
+	AND student_checkin.student_id = user_info.id
+  </select>
 </mapper>

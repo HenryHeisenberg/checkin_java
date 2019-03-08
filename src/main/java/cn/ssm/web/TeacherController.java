@@ -3,11 +3,14 @@ package cn.ssm.web;
 import cn.ssm.base.BaseResult;
 import cn.ssm.model.CheckinInfo;
 import cn.ssm.model.ClassInfo;
+import cn.ssm.model.StudentCheckInInfo;
 import cn.ssm.service.CheckinInfoService;
 import cn.ssm.service.ClassInfoService;
+import cn.ssm.service.StudentCheckinService;
 import cn.ssm.utils.util.StringUtil;
 import cn.ssm.utils.util.UUIDUtils;
 import com.github.pagehelper.PageHelper;
+import com.sun.corba.se.spi.ior.ObjectKey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/teacher")
@@ -27,6 +32,9 @@ public class TeacherController {
 
     @Autowired
     CheckinInfoService checkinInfoService;
+
+    @Autowired
+    StudentCheckinService studentCheckinService;
 
     @GetMapping("/getClassesByID")
     public Object getClassesByID(String id){
@@ -43,6 +51,10 @@ public class TeacherController {
     public Object createClass(ClassInfo classInfo){
         if(StringUtils.isEmpty(classInfo.getName())){
             return BaseResult.fail("课程名不能为空！");
+        }
+        List<ClassInfo> select = classInfoService.select(classInfo);
+        if(select.size()>0){
+            return BaseResult.fail("课程名不能重复！");
         }
         classInfo.setId(UUIDUtils.getUUID());
         classInfoService.insert(classInfo);
@@ -79,6 +91,21 @@ public class TeacherController {
         PageHelper.orderBy("create_time");
         List<CheckinInfo> select = checkinInfoService.select(checkinInfo);
         return BaseResult.success(select);
+    }
+
+    @GetMapping("/getCheckinInfo")
+    public Object getCheckinInfo (String id){
+        if(StringUtils.isEmpty(id)){
+            return BaseResult.fail("缺少参数");
+        }
+        Map<String ,Object> resultMap =new HashMap<>();
+        List<StudentCheckInInfo> presentStudents = studentCheckinService.getPresentStudents(id);
+        List<StudentCheckInInfo> absentStudents = studentCheckinService.getAbsentStudents(id);
+        int totalNum=presentStudents.size()+absentStudents.size();
+        resultMap.put("totalNum",totalNum);
+        resultMap.put("presentStudents",presentStudents);
+        resultMap.put("absentStudents",absentStudents);
+        return BaseResult.success(resultMap);
     }
 
 
